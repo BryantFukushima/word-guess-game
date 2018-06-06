@@ -1,13 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<title>Video Games | Word Guess Game</title>
 
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link href="https://fonts.googleapis.com/css?family=Bungee|Cute+Font|Press+Start+2P|VT323" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	
+
 </head>
 <body>
+	<div class="container">
+
+		<h1>Hangman: Video Games Theme</h1>
+
+		<div id="mArea">
+			<h2 id="uRight"></h2>
+		</div>
+
+		<div id="guRem">
+			<h3 class="inline">Lives:</h3>
+			<p class="inline">2</p>
+		</div>
+
+		<div id="guLet">
+			<h3 class="inline">Letters Used:</h3>
+			<p class="inline" id="guess"></p>
+		</div>
+
+	</div>
+
 	<script type="text/javascript" src="assets/javascript/game.js"></script>
 </body>
 </html>

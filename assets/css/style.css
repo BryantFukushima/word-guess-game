@@ -1,3 +1,35 @@
 body {
 	background: black;
+	color: white;
+	text-align: center;
+	font-family: 'Press Start 2P', cursive;
+}
+
+h1 {
+	font-size: 36px;
+	text-align: center;
+	margin: 2.5vw;
+}
+
+#mArea h2 {
+	font-size: 100px;
+	margin: 5vw 0;
+}
+
+#mArea span {
+	border-bottom: 2px solid white;
+}
+
+.inline {
+	display: inline-block;
+}
+
+#guRem {
+	float: left;
+	bottom: 0;
+}
+
+#guLet {
+	float: right;
+	bottom: 0;
 }
