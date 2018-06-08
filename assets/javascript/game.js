@@ -1,49 +1,56 @@
-var guLet = [];
-var uRight = document.querySelector('#uRight');
-var guess = document.querySelector('#guess');
-var answers = ['zelda' , 'pink'];
+var answers = ['zelda' , 'msweeper'];
 var randomAnswer = Math.floor(Math.random()*answers.length);
 var solWord = [];
+var main = document.querySelector('#main');
 
+	// "_" for answer print on load
 	for ( var i = 0; i < answers[randomAnswer].length; i++ ) {
 
 		solWord.push('_');
 	}
 
-	uRight.innerHTML = solWord.join(' ');
+	main.innerHTML = solWord.join(' ');
 
-	function userInput(e){
 
-		var key = e.key;
+var userGuessKey = [];
 
-		if (answers[randomAnswer] == 'zelda') {
-		if (key == 'z') {
-			solWord.splice(0, 1, 'z');
-			uRight.innerHTML = solWord.join(' ');
-		} else if (key == 'e') {
-			solWord.splice(1, 1, 'e');
-			uRight.innerHTML = solWord.join(' ');
-		} else if (key == 'l') {
-			solWord.splice(2, 1, 'l');
-			uRight.innerHTML = solWord.join(' ');
-		} else if (key == 'd') {
-			solWord.splice(3, 1, 'd');
-			uRight.innerHTML = solWord.join(' ');
-		} else if (key == 'a') {
-			solWord.splice(4, 1, 'a');
-			uRight.innerHTML = solWord.join(' ');
-		} else {
-			guLet.push(key);
-			guess.innerHTML = guLet.join(' ');
-		}
+function userInput(e) {
+
+	var userKey = e.key;
+	var guess = document.querySelector('#guess');
+
+
+	letGuess = [...new Set(userGuessKey)];
+		
+			if (answers[randomAnswer].includes(userKey) == false) {
+				userGuessKey.push(userKey);
+				guess.innerHTML = letGuess.join(' ');
+			} 
+
+		
+	
+
+	// var indexKey  = answers[randomAnswer].indexOf(userKey);
+
+	// if (answers[randomAnswer].includes(userKey) == true) {
+	// 	solWord.splice(indexKey, 1 , userKey);
+
+	// 	main.innerHTML = solWord.join(' ');
+	// }
+
+
+
+
+
+
+	for (var i = 0; i < answers[randomAnswer].length; i++) {
+	    if (answers[randomAnswer][i] == userKey) {
+	    	solWord.splice(i, 1 , userKey);
+	    
+	    }
 	}
+	main.innerHTML = solWord.join(' ');
 
-	if (answers[randomAnswer] == 'zelda' && solWord.join('') == 'zelda') {
-		randomAnswer = Math.floor(Math.random()*answers.length);
-	}
+}
 
-
-	}
-
-	document.onkeydown = userInput;
-
+document.onkeypress = userInput;
