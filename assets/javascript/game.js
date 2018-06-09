@@ -3,90 +3,85 @@ var random = Math.floor(Math.random() * answers.length);
 var randomAnswer = answers[random];
 var solWord = [];
 var main = document.querySelector('#main');
-var prevAnswer = [];
-var correctAnswer = [];
-var nextAnswer;
-
-// "_" for answer print on load
-
-for (var i = 0; i < answers[random].length; i++) {
-    if (answers[random][i] == " ") {
-
-        solWord.push('&nbsp;');
-    } else {
-        solWord.push('_');
-    }
-}
-
-main.innerHTML = solWord.join(' ');
 
 
+// START
+main.innerHTML = "Press Enter to Start."
+
+// NEW ANSWER WHEN SOLVED
 function newAnswer() {
+	solWord = [];
+		for (var i = 0; i < answers[random].length; i++) {
+		    if (answers[random][i] == " ") {
 
-	answers.splice(randomIndex , 1);
-	nextAnswer = answers;
+		        solWord.push('&nbsp; <br>');
+		    } else {
+		        solWord.push('_');
+		    }
+		}
 
-	if (nextAnswer.length == 0){
-    	main.innerHTML = "Mission Accomplished! All words found.";
-    }
-
-    random = Math.floor(Math.random() * answers.length);
-    randomAnswer = answers[random];
-    solWord = [];
-
-    for (var i = 0; i < nextAnswer[random].length; i++) {
-        if (nextAnswer[random][i] == " ") {
-
-            solWord.push('&nbsp;');
-        } else {
-            solWord.push('_');
-        }
-    }
-
-    main.innerHTML = solWord.join(' ');
+		main.innerHTML = solWord.join(' ');
 }
+
+// USER KEY INPUT
 
 var userGuessKey = [];
-var randomIndex = answers.indexOf(randomAnswer);
+var numLives = 15;
+var lives = document.querySelector('#lives');
+var numWins = 0;
+var wins = document.querySelector('#wins');
+
+	lives.innerHTML = numLives;
+	wins.innerHTML = numWins;
 
 function userInput(e) {
 
-    var userKey = e.key;
-    var guess = document.querySelector('#guess');
+	var userKey = e.key;
+	var guess = document.querySelector('#guess');
 
+	// letters used
+	if (userGuessKey.indexOf(userKey) == -1 && answers[random].includes(userKey) == false && userKey != "Enter") {
+		userGuessKey.push(userKey);
+		guess.innerHTML = guess.innerHTML + userKey + ' ';
+		
+		//number of lives
+		numLives--;
+		lives.innerHTML = numLives;
+	}
 
-    if (userGuessKey.indexOf(userKey) == -1 && randomAnswer.includes(userKey) == false && userKey != "Enter") {
-        userGuessKey.push(userKey);
-        guess.innerHTML = userGuessKey.join(' ');
-
-    }
- 
-
-    for (var i = 0; i < answers[random].length; i++) {
+	// letter correct, replace '_' with letter
+	for (var i = 0; i < answers[random].length; i++) {
         if (answers[random][i] == userKey && userKey != ' ') {
             solWord.splice(i, 1, userKey);
         }
     }
-
     main.innerHTML = solWord.join(' ');
 
- if (solWord.join('') == randomAnswer.replace(' ', '&nbsp;')) {
-        main.innerHTML = "Correct! Hit Enter to advance. <br><br>" + solWord.join(' ');
-        userGuessKey = [];
-        guess.innerHTML = userGuessKey.join(' ');
 
+    //solved word
+    if (solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+   		main.innerHTML = "Correct! Hit Enter to advance. <br><br>" + solWord.join(' ');
+   		userGuessKey = [];
+   		guess.innerHTML = userGuessKey.join(' ');
+		answers.splice(answers.indexOf(randomAnswer), 1);
+        random = Math.floor(Math.random() * answers.length);
+        randomAnswer = answers[random];
+        solWord = [];
+        numLives = 15;
+        lives.innerHTML = numLives;
+        numWins++;
+        wins.innerHTML = numWins;
     }
 
-
-    if (userKey === "Enter") {
-        
-        correctAnswer.push(randomAnswer);
-        newAnswer();
-
+    if (userKey == 'Enter'){
+    	newAnswer();
     }
 
+    if (answers.length == 0){
+    	main.innerHTML = "Mission Accomplished! All words found.";
+    	answers = ['space invaders', 'donkey kong' , 'pong' , 'pacman' , 'sonic' , 'street fighter' , 'zelda'];
+    }
 
 }
 
 document.onkeypress = userInput;
-
