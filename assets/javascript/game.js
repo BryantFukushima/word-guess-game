@@ -89,7 +89,7 @@ function userInput(e) {
     }
 
     if (numLives == 0){
-    	main.innerHTML = "GAME OVER";
+    	main.innerHTML = "GAME OVER" + "<br>" + "Word Missed: " + randomAnswer ;
     	numLives = 15;
     	lives.innerHTML = numLives;
     	numWins = 0;
