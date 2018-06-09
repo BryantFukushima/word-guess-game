@@ -1,55 +1,83 @@
-var answers = ['zelda' , 'msweeper'];
-var randomAnswer = Math.floor(Math.random()*answers.length);
+var answers = ['space invaders', 'one word'];
+var random = Math.floor(Math.random() * answers.length);
+var randomAnswer = answers[random];
 var solWord = [];
 var main = document.querySelector('#main');
+var prevAnswer = [];
+var correctAnswer = [];
 
-	// "_" for answer print on load
-	for ( var i = 0; i < answers[randomAnswer].length; i++ ) {
+// "_" for answer print on load
 
-		solWord.push('_');
-	}
+for (var i = 0; i < answers[random].length; i++) {
+    if (answers[random][i] == " ") {
 
-	main.innerHTML = solWord.join(' ');
+        solWord.push('&nbsp;');
+    } else {
+        solWord.push('_');
+    }
+}
 
+main.innerHTML = solWord.join(' ');
+
+
+function newAnswer() {
+
+	answers.splice(randomIndex , 1);
+    random = Math.floor(Math.random() * answers.length);
+    randomAnswer = answers[random];
+    solWord = [];
+    userGuessKey = [];
+
+    for (var i = 0; i < answers[random].length; i++) {
+        if (answers[random][i] == " ") {
+
+            solWord.push('&nbsp;');
+        } else {
+            solWord.push('_');
+        }
+    }
+
+    main.innerHTML = solWord.join(' ');
+}
 
 var userGuessKey = [];
+var randomIndex = answers.indexOf(randomAnswer);
 
 function userInput(e) {
 
-	var userKey = e.key;
-	var guess = document.querySelector('#guess');
+    var userKey = e.key;
+    var guess = document.querySelector('#guess');
 
 
-	letGuess = [...new Set(userGuessKey)];
-		
-			if (answers[randomAnswer].includes(userKey) == false) {
-				userGuessKey.push(userKey);
-				guess.innerHTML = letGuess.join(' ');
-			} 
+    if (userGuessKey.indexOf(userKey) == -1 && randomAnswer.includes(userKey) == false) {
+        userGuessKey.push(userKey);
+        guess.innerHTML = userGuessKey.join(' ');
 
-		
-	
+    }
+ 
 
-	// var indexKey  = answers[randomAnswer].indexOf(userKey);
+    for (var i = 0; i < answers[random].length; i++) {
+        if (answers[random][i] == userKey) {
+            solWord.splice(i, 1, userKey);
+        }
+    }
 
-	// if (answers[randomAnswer].includes(userKey) == true) {
-	// 	solWord.splice(indexKey, 1 , userKey);
+    main.innerHTML = solWord.join(' ');
 
-	// 	main.innerHTML = solWord.join(' ');
-	// }
+ if (solWord.join('') == randomAnswer.replace(' ', '&nbsp;')) {
+        main.innerHTML = "Correct! Hit Enter to advance. <br><br>" + solWord.join(' ');
+        userGuessKey = [];
 
-
-
-
+    }
 
 
-	for (var i = 0; i < answers[randomAnswer].length; i++) {
-	    if (answers[randomAnswer][i] == userKey) {
-	    	solWord.splice(i, 1 , userKey);
-	    
-	    }
-	}
-	main.innerHTML = solWord.join(' ');
+    if (userKey === "Enter") {
+        
+        correctAnswer.push(randomAnswer);
+        newAnswer();
+
+    }
+
 
 }
 
