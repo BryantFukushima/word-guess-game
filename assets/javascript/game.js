@@ -1,10 +1,11 @@
-var answers = ['space invaders', 'one word'];
+var answers = ['space invaders', 'donkey kong' , 'pong' , 'pacman' , 'sonic' , 'street fighter' , 'zelda'];
 var random = Math.floor(Math.random() * answers.length);
 var randomAnswer = answers[random];
 var solWord = [];
 var main = document.querySelector('#main');
 var prevAnswer = [];
 var correctAnswer = [];
+var nextAnswer;
 
 // "_" for answer print on load
 
@@ -23,13 +24,18 @@ main.innerHTML = solWord.join(' ');
 function newAnswer() {
 
 	answers.splice(randomIndex , 1);
+	nextAnswer = answers;
+
+	if (nextAnswer.length == 0){
+    	main.innerHTML = "Mission Accomplished! All words found.";
+    }
+
     random = Math.floor(Math.random() * answers.length);
     randomAnswer = answers[random];
     solWord = [];
-    userGuessKey = [];
 
-    for (var i = 0; i < answers[random].length; i++) {
-        if (answers[random][i] == " ") {
+    for (var i = 0; i < nextAnswer[random].length; i++) {
+        if (nextAnswer[random][i] == " ") {
 
             solWord.push('&nbsp;');
         } else {
@@ -49,7 +55,7 @@ function userInput(e) {
     var guess = document.querySelector('#guess');
 
 
-    if (userGuessKey.indexOf(userKey) == -1 && randomAnswer.includes(userKey) == false) {
+    if (userGuessKey.indexOf(userKey) == -1 && randomAnswer.includes(userKey) == false && userKey != "Enter") {
         userGuessKey.push(userKey);
         guess.innerHTML = userGuessKey.join(' ');
 
@@ -57,7 +63,7 @@ function userInput(e) {
  
 
     for (var i = 0; i < answers[random].length; i++) {
-        if (answers[random][i] == userKey) {
+        if (answers[random][i] == userKey && userKey != ' ') {
             solWord.splice(i, 1, userKey);
         }
     }
@@ -67,6 +73,7 @@ function userInput(e) {
  if (solWord.join('') == randomAnswer.replace(' ', '&nbsp;')) {
         main.innerHTML = "Correct! Hit Enter to advance. <br><br>" + solWord.join(' ');
         userGuessKey = [];
+        guess.innerHTML = userGuessKey.join(' ');
 
     }
 
@@ -82,3 +89,4 @@ function userInput(e) {
 }
 
 document.onkeypress = userInput;
+
