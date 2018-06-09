@@ -80,6 +80,21 @@ function userInput(e) {
     if (answers.length == 0){
     	main.innerHTML = "Mission Accomplished! All words found.";
     	answers = ['space invaders', 'donkey kong' , 'pong' , 'pacman' , 'sonic' , 'street fighter' , 'zelda'];
+    	numLives = 15;
+    	lives.innerHTML = numLives;
+    	numWins = 0;
+    	wins.innerHTML = numWins;
+    }
+
+    if (numLives == 0){
+    	main.innerHTML = "GAME OVER";
+    	numLives = 15;
+    	lives.innerHTML = numLives;
+    	numWins = 0;
+    	wins.innerHTML = numWins;
+    }
+    if (numLives == 0 && userKey == 'Enter'){
+    	
     }
 
 }
