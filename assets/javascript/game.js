@@ -3,6 +3,15 @@ var random = Math.floor(Math.random() * answers.length);
 var randomAnswer = answers[random];
 var solWord = [];
 var main = document.querySelector('#main');
+var userGuessKey = [];
+var guess = document.querySelector('#guess');
+var numLives = 15;
+var lives = document.querySelector('#lives');
+var numWins = 0;
+var wins = document.querySelector('#wins');
+
+	lives.innerHTML = numLives;
+	wins.innerHTML = numWins;
 
 
 // START
@@ -11,6 +20,9 @@ main.innerHTML = "Press Enter to Start."
 // NEW ANSWER WHEN SOLVED
 function newAnswer() {
 	solWord = [];
+	guess.innerHTML = "";
+	numLives = 15;
+        lives.innerHTML = numLives;
 		for (var i = 0; i < answers[random].length; i++) {
 		    if (answers[random][i] == " ") {
 
@@ -25,19 +37,9 @@ function newAnswer() {
 
 // USER KEY INPUT
 
-var userGuessKey = [];
-var numLives = 15;
-var lives = document.querySelector('#lives');
-var numWins = 0;
-var wins = document.querySelector('#wins');
-
-	lives.innerHTML = numLives;
-	wins.innerHTML = numWins;
-
 function userInput(e) {
 
 	var userKey = e.key;
-	var guess = document.querySelector('#guess');
 
 	// letters used
 	if (userGuessKey.indexOf(userKey) == -1 && answers[random].includes(userKey) == false && userKey != "Enter") {
@@ -66,15 +68,15 @@ function userInput(e) {
 		answers.splice(answers.indexOf(randomAnswer), 1);
         random = Math.floor(Math.random() * answers.length);
         randomAnswer = answers[random];
-        solWord = [];
         numLives = 15;
         lives.innerHTML = numLives;
         numWins++;
         wins.innerHTML = numWins;
     }
 
-    if (userKey == 'Enter'){
+    if (solWord.length == 0 || userKey == 'Enter'){
     	newAnswer();
+
     }
 
     if (answers.length == 0){
@@ -92,9 +94,6 @@ function userInput(e) {
     	lives.innerHTML = numLives;
     	numWins = 0;
     	wins.innerHTML = numWins;
-    }
-    if (numLives == 0 && userKey == 'Enter'){
-    	
     }
 
 }
