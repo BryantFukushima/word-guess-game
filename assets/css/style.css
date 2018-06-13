@@ -47,3 +47,7 @@ h1 {
 	float: right;
 	bottom: 0;
 }
+
+#answerImg img{
+	max-height: 100px; 
+}

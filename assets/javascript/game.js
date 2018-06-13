@@ -96,6 +96,55 @@ function userInput(e) {
     	wins.innerHTML = numWins;
     }
 
+    var answerImg = document.querySelector('#answerImg');
+
+        if (solWord.join('').replace('&nbsp; <br>' , ' ') == "space invaders") {
+			answerImg.innerHTML = '<img src="https://media.giphy.com/media/KY2ZMhnCxP008/giphy.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "donkey kong") {
+			answerImg.innerHTML = '<img src="https://i.pinimg.com/originals/81/29/ae/8129aedf02989ab2f9ce4269ed6f4a05.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "pong") {
+			answerImg.innerHTML = '<img src="https://media.giphy.com/media/2F0P5xIMpwrXW/giphy.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "pacman") {
+			answerImg.innerHTML = '<img src="https://media2.giphy.com/media/A8NkSPltT13H2/giphy.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "sonic") {
+			answerImg.innerHTML = '<img src="https://pa1.narvii.com/6186/c3ee3affc57edf16cb7390e7949bff841152ea40_hq.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "street fighter") {
+			answerImg.innerHTML = '<img src="https://media.giphy.com/media/CKCQLQJfRr2h2/giphy.gif">'
+		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "zelda") {
+			answerImg.innerHTML = '<img src="https://i.imgur.com/9OYTkqj.gif">'
+		} else {
+			answerImg.innerHTML = '';
+		}
+
+
+//  else if (answers[random] == "donkey kong" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// } else if (answers[random] == "pong" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// } else if (answers[random] == "pacman" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// } else if (answers[random] == "sonic" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// } else if (answers[random] == "street fighter" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// } else if (answers[random] == "zelda" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
+
+// }
+
 }
 
 document.onkeypress = userInput;
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
