@@ -9,6 +9,13 @@ var numLives = 15;
 var lives = document.querySelector('#lives');
 var numWins = 0;
 var wins = document.querySelector('#wins');
+var siSong = new Audio('assets/music/space-invaders.mp3');
+var dkSong = new Audio('assets/music/donkey-kong.mp3');
+var pongSong = new Audio('assets/music/pong.mp3');
+var pmSong = new Audio('assets/music/pacman.mp3');
+var sonicSong = new Audio('assets/music/sonic.mp3');
+var sfSong = new Audio('assets/music/street-fighter.mp3');
+var zeldaSong = new Audio('assets/music/zelda.mp3');
 
 	lives.innerHTML = numLives;
 	wins.innerHTML = numWins;
@@ -33,6 +40,14 @@ function newAnswer() {
 		}
 
 		main.innerHTML = solWord.join(' ');
+}
+
+function audioPlay(songPlay){
+	songPlay.play();
+}
+
+function audioPause(songPause){
+	songPause.pause();
 }
 
 // USER KEY INPUT
@@ -76,7 +91,13 @@ function userInput(e) {
 
     if (solWord.length == 0 || userKey == 'Enter'){
     	newAnswer();
-
+    	audioPause(siSong);
+    	audioPause(dkSong);
+    	audioPause(pongSong);
+    	audioPause(pmSong);
+    	audioPause(sonicSong);
+    	audioPause(sfSong);
+    	audioPause(zeldaSong);
     }
 
     if (answers.length == 0){
@@ -97,40 +118,32 @@ function userInput(e) {
     }
 
     var answerImg = document.querySelector('#answerImg');
+    
 
         if (solWord.join('').replace('&nbsp; <br>' , ' ') == "space invaders") {
 			answerImg.innerHTML = '<img src="https://media.giphy.com/media/KY2ZMhnCxP008/giphy.gif">'
+			audioPlay(siSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "donkey kong") {
 			answerImg.innerHTML = '<img src="https://i.pinimg.com/originals/81/29/ae/8129aedf02989ab2f9ce4269ed6f4a05.gif">'
+			audioPlay(dkSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "pong") {
 			answerImg.innerHTML = '<img src="https://media.giphy.com/media/2F0P5xIMpwrXW/giphy.gif">'
+			audioPlay(pongSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "pacman") {
 			answerImg.innerHTML = '<img src="https://media2.giphy.com/media/A8NkSPltT13H2/giphy.gif">'
+			audioPlay(pmSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "sonic") {
 			answerImg.innerHTML = '<img src="https://pa1.narvii.com/6186/c3ee3affc57edf16cb7390e7949bff841152ea40_hq.gif">'
+			audioPlay(sonicSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "street fighter") {
 			answerImg.innerHTML = '<img src="https://media.giphy.com/media/CKCQLQJfRr2h2/giphy.gif">'
+			audioPlay(sfSong);
 		} else if (solWord.join('').replace('&nbsp; <br>' , ' ') == "zelda") {
 			answerImg.innerHTML = '<img src="https://i.imgur.com/9OYTkqj.gif">'
+			audioPlay(zeldaSong);
 		} else {
 			answerImg.innerHTML = '';
 		}
-
-
-//  else if (answers[random] == "donkey kong" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// } else if (answers[random] == "pong" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// } else if (answers[random] == "pacman" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// } else if (answers[random] == "sonic" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// } else if (answers[random] == "street fighter" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// } else if (answers[random] == "zelda" && solWord.join('') == answers[random].replace(' ', '&nbsp; <br>')) {
-
-// }
-
 }
 
 document.onkeypress = userInput;
